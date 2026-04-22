@@ -3,6 +3,8 @@ import { AdminLoginCard } from "@/components/admin/admin-login-card";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { getAllMessages, getAllTags } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminPage() {
   const authenticated = await isAdminAuthenticated();
   if (!authenticated) {
