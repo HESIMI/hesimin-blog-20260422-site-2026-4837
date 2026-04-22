@@ -1,0 +1,24 @@
+<svg width="960" height="1200" viewBox="0 0 960 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="80" x2="850" y2="1130" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFC3DD"/>
+      <stop offset="0.5" stop-color="#FFDFA8"/>
+      <stop offset="1" stop-color="#BFE7FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="1200" fill="url(#bg)"/>
+  <circle cx="760" cy="210" r="140" fill="#FFFFFF" fill-opacity="0.45"/>
+  <circle cx="200" cy="290" r="110" fill="#FFFFFF" fill-opacity="0.4"/>
+  <circle cx="500" cy="720" r="300" fill="#FFFFFF" fill-opacity="0.5"/>
+  <path d="M353 486C353 399.366 423.366 329 510 329C596.634 329 667 399.366 667 486V770H353V486Z" fill="#FFE8C6"/>
+  <circle cx="510" cy="306" r="128" fill="#FFD7B8"/>
+  <path d="M398 284C412 229 452 188 510 188C568 188 608 229 622 284C582 252 553 246 510 246C467 246 438 252 398 284Z" fill="#5B3E3E"/>
+  <circle cx="464" cy="312" r="11" fill="#3B2E2E"/>
+  <circle cx="556" cy="312" r="11" fill="#3B2E2E"/>
+  <path d="M470 366C486 382 534 382 550 366" stroke="#3B2E2E" stroke-width="10" stroke-linecap="round"/>
+  <path d="M420 824C438 770 478 748 510 748C542 748 582 770 600 824" stroke="#F29AA4" stroke-width="16" stroke-linecap="round"/>
+  <text x="480" y="1035" text-anchor="middle" fill="#5E4B68" font-family="Arial, sans-serif" font-size="46" font-weight="700">
+    Replace with your photo
+  </text>
+</svg>
+
