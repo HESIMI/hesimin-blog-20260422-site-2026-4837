@@ -11,6 +11,14 @@ export default async function AdminPage() {
     return <AdminLoginCard />;
   }
 
-  const [tags, messages] = await Promise.all([getAllTags(), getAllMessages()]);
+  let tags = [] as Awaited<ReturnType<typeof getAllTags>>;
+  let messages = [] as Awaited<ReturnType<typeof getAllMessages>>;
+
+  try {
+    [tags, messages] = await Promise.all([getAllTags(), getAllMessages()]);
+  } catch (error) {
+    console.error("[/admin] failed to load admin data:", error);
+  }
+
   return <AdminDashboard initialTags={tags} initialMessages={messages} />;
 }

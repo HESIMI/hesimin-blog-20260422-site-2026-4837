@@ -7,19 +7,24 @@ type RouteContext = {
 };
 
 export async function PATCH(_: Request, context: RouteContext) {
-  const unauthorized = await ensureAdminApiAccess();
-  if (unauthorized) return unauthorized;
+  try {
+    const unauthorized = await ensureAdminApiAccess();
+    if (unauthorized) return unauthorized;
 
-  const { id } = await context.params;
-  const messageId = parseNumericId(id);
-  if (!messageId) {
-    return NextResponse.json({ error: "Invalid message id" }, { status: 400 });
+    const { id } = await context.params;
+    const messageId = parseNumericId(id);
+    if (!messageId) {
+      return NextResponse.json({ error: "Invalid message id" }, { status: 400 });
+    }
+
+    const updated = await markMessageAsRead(messageId);
+    if (!updated) {
+      return NextResponse.json({ error: "Message not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("[/api/admin/messages/:id/read] failed to mark as read:", error);
+    return NextResponse.json({ error: "Mark read failed" }, { status: 503 });
   }
-
-  const updated = await markMessageAsRead(messageId);
-  if (!updated) {
-    return NextResponse.json({ error: "Message not found" }, { status: 404 });
-  }
-
-  return NextResponse.json({ success: true });
 }

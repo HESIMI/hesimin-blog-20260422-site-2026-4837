@@ -7,19 +7,24 @@ type RouteContext = {
 };
 
 export async function DELETE(_: Request, context: RouteContext) {
-  const unauthorized = await ensureAdminApiAccess();
-  if (unauthorized) return unauthorized;
+  try {
+    const unauthorized = await ensureAdminApiAccess();
+    if (unauthorized) return unauthorized;
 
-  const { id } = await context.params;
-  const messageId = parseNumericId(id);
-  if (!messageId) {
-    return NextResponse.json({ error: "Invalid message id" }, { status: 400 });
+    const { id } = await context.params;
+    const messageId = parseNumericId(id);
+    if (!messageId) {
+      return NextResponse.json({ error: "Invalid message id" }, { status: 400 });
+    }
+
+    const deleted = await deleteMessageById(messageId);
+    if (!deleted) {
+      return NextResponse.json({ error: "Message not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("[/api/admin/messages/:id] failed to delete message:", error);
+    return NextResponse.json({ error: "Delete message failed" }, { status: 503 });
   }
-
-  const deleted = await deleteMessageById(messageId);
-  if (!deleted) {
-    return NextResponse.json({ error: "Message not found" }, { status: 404 });
-  }
-
-  return NextResponse.json({ success: true });
 }
