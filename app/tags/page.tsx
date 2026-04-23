@@ -4,6 +4,13 @@ import { getAllTags } from "@/lib/db";
 export const dynamic = "force-dynamic";
 
 export default async function TagsPage() {
-  const initialTags = await getAllTags();
+  let initialTags = [] as Awaited<ReturnType<typeof getAllTags>>;
+
+  try {
+    initialTags = await getAllTags();
+  } catch (error) {
+    console.error("[/tags] failed to load tags:", error);
+  }
+
   return <TagWallBoard initialTags={initialTags} />;
 }
